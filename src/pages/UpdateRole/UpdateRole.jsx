@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import './updateRole.css'
-import { useUser } from '../../context/userContext.jsX'
+import { useUser } from '../../context/userContext.jsx'
 
 export default function UpdateRole() {
   const { getAllUser } = useUser()
