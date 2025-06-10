@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import './register.css';
-import { useUser as useUserContext } from "../../context/userContext.jsX";
+import { useUser as useUserContext } from "../../context/userContext.jsx";
 
 const Register = () => {
   const [user, setUser] = useState({
