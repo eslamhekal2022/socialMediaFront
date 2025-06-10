@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default function GetFilterCat({ category }) {
  const { i18n } = useTranslation();
-    const lang = i18n.language||localStorage.getItem("i18nextLng");
+const lang = i18n.language || localStorage.getItem("i18nextLng") || "en";
   const [data, setdata] = useState([]);
     const API = import.meta.env.VITE_API_URL;
 
@@ -43,9 +43,8 @@ export default function GetFilterCat({ category }) {
 alt={x.name?.[lang] || 'No name'}
                 className="product-image"
               />
-<p>{x.name?.[lang] || 'No name'}</p>
-              
-<p className="product-description">{x.description?.[lang] || 'No description'}</p>
+<p>{x.name?.[lang] || x.name?.en || "Unnamed Product"}</p>
+<p>{x.description?.[lang] || x.description?.en || "No Description"}</p>
               <p>{x.price}$</p>
             </div>
           </Link>
