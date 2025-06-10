@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 
 export default function GetFilterCat({ category }) {
  const { i18n } = useTranslation();
-    const lang = i18n.language || "en";
+    const lang = i18n.language;
   const [data, setdata] = useState([]);
-                const API = import.meta.env.VITE_API_URL;
+    const API = import.meta.env.VITE_API_URL;
 
   async function getBYCategory() {
     try {
@@ -36,7 +36,7 @@ export default function GetFilterCat({ category }) {
     <div className='GetProductsCat'>
       <div className="ContainerGetProductsCat">
         {data?.map((x, i) => (
-          <Link to={`/ProductDet/${x._id}`} className='LinkProductDet' id='Link' key={x._id}>
+          <Link to={`/ProductDet/${x._id}`} className='LinkProductDet' id='Link' key={i}>
             <div className='productFilterCat'>
               <img
                 src={`${API}${x.images[0]}`}
