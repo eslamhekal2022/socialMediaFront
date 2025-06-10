@@ -1,0 +1,97 @@
+.ReviewUsers {
+  width: 100%;
+  padding: 3rem 1rem;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+
+
+.review-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 90%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.review-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.user-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #4CAF50;
+}
+
+.user-name {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.review-card
+.rating {
+  color: #f39c12;
+  font-weight: bold;
+  margin: 0.3rem 0;
+}
+
+.comment {
+  font-style: italic;
+  color: #555;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+
+.DeleteRev {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  padding: 5px;
+  transition: .3s;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.DeleteRev:hover{
+  background-color: red;
+
+cursor: pointer;
+}
+/* Responsive improvements */
+@media (max-width: 600px) {
+  .descTesmon {
+    font-size: 1.5rem;
+  }
+
+  .review-container {
+    gap: 1.2rem;
+  }
+
+  .review-card {
+    padding: 15px;
+  }
+}

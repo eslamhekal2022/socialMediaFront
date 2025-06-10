@@ -1,0 +1,65 @@
+.contacts-page {
+  padding: 20px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.contacts-page h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.contacts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  table-layout: fixed; /* يضمن توزيع الأعمدة بالتساوي */
+}
+
+.contacts-table th,
+.contacts-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  font-size: 1rem;
+  word-wrap: break-word; /* يكسر الكلمات الطويلة */
+}
+
+.contacts-table th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.contacts-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .contacts-page {
+    padding: 10px;
+  }
+
+  .contacts-page h2 {
+    font-size: 1.25rem;
+  }
+
+  .contacts-table th,
+  .contacts-table td {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contacts-page h2 {
+    font-size: 1.1rem;
+  }
+
+  .contacts-table th,
+  .contacts-table td {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+}

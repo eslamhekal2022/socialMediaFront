@@ -1,0 +1,70 @@
+.checkout-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.checkout-items {
+  margin-bottom: 20px;
+}
+
+.checkout-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.checkout-item p {
+  margin: 0;
+  font-size: 16px;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+.confirm-order-btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.confirm-order-btn:hover {
+  background-color: #218838;
+}
+.RateRestaurant{
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #invoice-section, #invoice-section * {
+    visibility: visible;
+  }
+
+  #invoice-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
