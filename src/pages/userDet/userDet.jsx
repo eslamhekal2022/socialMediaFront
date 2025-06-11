@@ -35,7 +35,7 @@ export default function UserDet() {
 
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/updateUserImage/${id}`,
+        `${API}/updateUserImage/${id}`,
         formData,
         
         {
@@ -77,7 +77,7 @@ export default function UserDet() {
           userDet?.image
             ? userDet.image.startsWith('http')
               ? `${userDet.image}?t=${timestamp}`
-              : `${process.env.REACT_APP_API_URL}${userDet.image}?t=${timestamp}`
+              : `${API}${userDet.image}?t=${timestamp}`
             : `https://ui-avatars.com/api/?name=${userDet?.name}&background=random&color=fff`
         }
         alt={userDet?.name || 'user'}
