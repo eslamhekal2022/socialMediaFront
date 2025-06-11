@@ -4,11 +4,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './checkOut.css';
+import { useTranslation } from "react-i18next";
 
 export default function CheckoutPage() {
   const { cart, getCart } = useCart();
   const navigate = useNavigate();
   const invoiceRef = useRef();
+      const { i18n } = useTranslation();
+  const lang = i18n.language || "en";
+
             const API = import.meta.env.VITE_API_URL;
 
   const[redirectedToReview, setRedirectedToReview] = useState(false);
@@ -68,7 +72,7 @@ export default function CheckoutPage() {
             <div className="checkout-items">
               {items.map((item, index) => (
                 <div key={index} className="checkout-item">
-                  <p><strong>{item.name}</strong> × {item.quantity} — ${item.price}</p>
+                  <p><strong>{item.name[lang]}</strong> × {item.quantity} — ${item.price}</p>
                 </div>
               ))}
             </div>
