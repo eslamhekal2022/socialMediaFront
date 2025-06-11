@@ -17,7 +17,7 @@ const HeroSection = () => {
         <h2>{t("Home1")}</h2>
         <p> {t("Home2")}</p>
        <Link to={"/allProducts"}>
-       <button className="cta-button">    Shop now    </button>
+       <button className="cta-button">{t("shopNow")}</button>
        </Link> 
       </div>
     </header>
