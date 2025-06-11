@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 const Contact = () => {
   const [formData, setFormData] = useState({ message: '' });
   const [successMessage, setSuccessMessage] = useState('');
+            const API = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -14,7 +15,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-   const {data}=await axios.post(`${process.env.REACT_APP_API_URL}/addContact`,formData,{
+   const {data}=await axios.post(`${API}/addContact`,formData,{
     headers:{
         token:localStorage.getItem("token")
     }
