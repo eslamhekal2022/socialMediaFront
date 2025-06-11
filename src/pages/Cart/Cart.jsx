@@ -3,11 +3,14 @@ import axios from 'axios';
 import { useCart } from '../../context/CartContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import './Cart.css';
+import { useTranslation } from "react-i18next";
 
 export default function CartComponent() {
   const { cart, removeCart, getCart } = useCart();
-            const API = import.meta.env.VITE_API_URL;
+      const { i18n,t } = useTranslation();
 
+ const lang = i18n.language || "en";
+  const API = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const items = Array.isArray(cart) ? cart : [];
   
@@ -56,7 +59,7 @@ export default function CartComponent() {
                   />
                 </div>
                 <div className="cart-item-details">
-                  <h3 className="item-name">{item.name}</h3>
+                  <h3 className="item-name">{item.name[lang]}</h3>
                   <p className="item-price">Price: ${item.price?.toFixed(2)}</p>
                   <div className="quantity-controls">
                     <button onClick={() => decreaseQuantity(item)} disabled={item.quantity <= 1}>-</button>
@@ -74,7 +77,7 @@ export default function CartComponent() {
           <div className="cart-total">
             <h3>Total: ${totalPrice.toFixed(2)}</h3>
             <button className="checkout-btn" onClick={() => navigate("/checkout")}>
-              ✅ Proceed to Checkout
+              ✅ {t("proccedCheckout")}
             </button>
           </div>
         </>
