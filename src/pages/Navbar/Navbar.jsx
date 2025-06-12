@@ -8,6 +8,9 @@ import { useTranslation } from 'react-i18next';
 import egypt from "./Flag_of_Egypt.png"
 import UNS from "./Flag_of_the_United_States.png"
 export default function Navbar() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const handleCloseMenu = () => setMenuOpen(false);
   
   const { countCart, countWishList } = useCart();
   const { countUsers } = useUser();
@@ -36,9 +39,6 @@ const [selectedLang, setSelectedLang] = useState(i18n.language);
 
   const isPrivileged = user?.role === "admin" || user?.role === "moderator"; // 💡 هنا
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [menuOpen, setMenuOpen] = useState(false);
-  const handleCloseMenu = () => setMenuOpen(false);
 
   const handleSearchChange = (e) => {
     const query = e.target.value;

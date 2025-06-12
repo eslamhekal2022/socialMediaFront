@@ -7,7 +7,7 @@ const SearchComponent = () => {
   const location = useLocation();
   const [products, setProducts] = useState([]);
   const query = new URLSearchParams(location.search).get('query');
-                const API = import.meta.env.VITE_API_URL;
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {

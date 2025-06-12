@@ -27,7 +27,10 @@ export const CartProvider = ({ children }) => {
           },
         }
       );
-      if (data.success) getCart();
+      if (data.success) {
+        toast.success("this product added to cart")
+        getCart()
+      };
     } catch (err) {
       console.error("Error adding to cart:", err.response?.data?.message || err.message);
       toast.error("فشل في إضافة المنتج للسلة");
