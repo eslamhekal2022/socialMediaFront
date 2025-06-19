@@ -59,7 +59,9 @@ const Register = () => {
       });
 
       if (res.data?.success) {
-        navigate("/login");
+toast.success("تم التسجيل بنجاح! تحقق من بريدك الإلكتروني لتفعيل الحساب.");
+navigate(`/CheckEmail`);
+
         setRefresh((prev) => !prev);
         localStorage.setItem("phone", user.phone);
       }

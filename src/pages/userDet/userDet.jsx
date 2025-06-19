@@ -5,26 +5,22 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { updateUserImage } from '../../Redux/user';
 import './userDet.css'; 
+import GetUserPosts from '../PostsSystem/GetUserPosts.jsx';
+import AddPost from '../PostsSystem/CreatePosts.jsx';
+import { useUser } from '../../context/userContext.jsx';
 
 export default function UserDet() {
-  const [userDet, setuserDet] = useState({});
+  
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [timestamp, setTimestamp] = useState(Date.now());
   const dispatch = useDispatch();
-                const API = import.meta.env.VITE_API_URL;
+  const API = import.meta.env.VITE_API_URL;
 
-  async function getUser() {
-    try {
-      const { data } = await axios.get(`${API}/getuser/${id}`);
-      if (data.success) {
-        setuserDet(data.data);
-        toast.success('User loaded');
-      }
-    } catch (err) {
-      toast.error('Error getting user');
-    }
-  }
+
+
+  const {getUser,setuserDet,userDet}=useUser()
+
 
   async function handleFileChange(e) {
     const file = e.target.files[0];
@@ -56,35 +52,48 @@ export default function UserDet() {
       toast.error('Error uploading image');
     }
   }
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
+useEffect(() => {
+  if (id) getUser(id);
+}, [id]);
   return (
-    <div className="user-details-container">
-      <input
-        type="file"
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-        onChange={handleFileChange}
-        accept="image/*"
-      />
+  <div className="user-details-container">
 
-      <img
-        className="user-profile-image"
-        src={
-          userDet?.image
-            ? userDet.image.startsWith('http')
-              ? `${userDet.image}?t=${timestamp}`
-              : `${API}${userDet.image}?t=${timestamp}`
-            : `https://ui-avatars.com/api/?name=${userDet?.name}&background=random&color=fff`
-        }
-        alt={userDet?.name || 'user'}
-        onClick={() => fileInputRef.current.click()}
-      />
+  <input
+    type="file"
+    ref={fileInputRef}
+    style={{ display: 'none' }}
+    onChange={handleFileChange}
+    accept="image/*"
+  />
 
-      <h1 className="user-name">{userDet?.name}</h1>
-    </div>
+  {/* صورة المستخدم */}
+  <img
+    className="user-profile-image"
+    src={
+      userDet?.image
+        ? userDet.image.startsWith('http')
+          ? `${userDet.image}?t=${timestamp}`
+          : `${API}${userDet.image}?t=${timestamp}`
+        : `https://ui-avatars.com/api/?name=${userDet?.name}&background=random&color=fff`
+    }
+    alt={userDet?.name || 'user'}
+    onClick={() => fileInputRef.current.click()}
+  />
+
+  {/* اسم المستخدم */}
+  <h1 className="user-name">{userDet?.name}</h1>
+
+  {/* بوكس إضافة منشور */}
+  <div className="profile-section">
+    <AddPost userId={id} />
+  </div>
+
+  {/* بوكس عرض المنشورات */}
+  <div className="profile-section">
+    <GetUserPosts  />
+  </div>
+  
+</div>
+
   );
 }

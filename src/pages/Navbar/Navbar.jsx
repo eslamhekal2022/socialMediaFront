@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import './navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../../context/CartContext.jsx';
 import { useUser } from '../../context/userContext.jsx';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import egypt from "./Flag_of_Egypt.png"
 import UNS from "./Flag_of_the_United_States.png"
+import { FaIcons } from "react-icons/fa";
+import { IoIosNotifications } from "react-icons/io";
+import { useNotification } from '../../context/notifications.jsx';
+
 export default function Navbar() {
+  const {notifications}=useNotification()
+
+  const [UnreadNotifications, setUnreadNotifications] = useState([])
+    useEffect(() => {
+    const unread = notifications.filter((n) => !n.isRead).length;
+    setUnreadNotifications(unread);
+  }, [notifications]);
   const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const handleCloseMenu = () => setMenuOpen(false);
   
-  const { countCart, countWishList } = useCart();
+
   const { countUsers } = useUser();
   const token = localStorage.getItem("token");
   const user = useSelector((x) => x.user.user);
@@ -73,8 +83,8 @@ const [selectedLang, setSelectedLang] = useState(i18n.language);
 
         <div className="nav-left">
           <Link onClick={handleCloseMenu} to="/" className="logo">
-            <i className="fa fa-leaf Leaf"></i>
-            <h1>Rambo</h1>
+          <FaIcons/>
+            <h1>Social-Goal</h1>
           </Link>
         </div>
 
@@ -89,20 +99,11 @@ const [selectedLang, setSelectedLang] = useState(i18n.language);
         </div>
 
         <div className={`nav-right ${menuOpen ? 'menu-open' : ''}`}>
-          {token && (
-            <>
-              <Link onClick={handleCloseMenu} to="/cart" className="icon-link">
-                <i className="fa fa-cart-plus"></i>
-                <span className="count">{countCart}</span>
-              </Link>
-
-              <Link onClick={handleCloseMenu} to="/WishList" className="icon-link">
-                <i className="fa fa-heart"></i>
-                <span className="count">{countWishList}</span>
-              </Link>
-            </>
-          )}
-
+         
+<Link onClick={handleCloseMenu} to="/notifications" className="icon-link">
+              <IoIosNotifications/>
+            {UnreadNotifications==0?null: <span className="count">{UnreadNotifications}</span>} 
+            </Link>
           {token && isPrivileged && (
             <Link onClick={handleCloseMenu} to="/AllUser" className="icon-link">
               <i className="fa fa-user"></i>
@@ -110,11 +111,7 @@ const [selectedLang, setSelectedLang] = useState(i18n.language);
             </Link>
           )}
 
-          {token && (
-            <Link onClick={handleCloseMenu} to="/meOrder" className="icon-link">
-              <i className="fas fa-box"></i>
-            </Link>
-          )}
+        
 
           {token && isPrivileged && (
             <Link onClick={handleCloseMenu} to="/adminPanel">

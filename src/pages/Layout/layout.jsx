@@ -3,8 +3,6 @@ import { Outlet} from 'react-router-dom'
 import Navbar from '../Navbar/Navbar'
 import { useDispatch } from 'react-redux';
 import { setUserRedux } from '../../Redux/user.js';
-import ScrollToTop from '../ScrollTop/ScrollTop.jsx';
-import Footer from '../Footer/Footer.jsx';
 
 export default function Layout() {
 
@@ -23,12 +21,10 @@ useEffect(() => {
 
   return (
     <>
-    <ScrollToTop/>
 
     <Navbar/>
 
 <Outlet></Outlet>
-<Footer/>
 
     </>
   )

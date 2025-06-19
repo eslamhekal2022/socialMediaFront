@@ -6,14 +6,14 @@ import en from './locals/en.json';
 import ar from './locals/ar.json';
 
 i18n
-  .use(LanguageDetector) // يكتشف لغة المتصفح أو المستخدم
-  .use(initReactI18next) // يربط مع React
+  .use(LanguageDetector) 
+  .use(initReactI18next) 
   .init({
     resources: {
       en: { translation: en },
       ar: { translation: ar },
     },
-    fallbackLng: 'en', // اللغة الافتراضية لو الترجمة مش متوفرة
+    fallbackLng: 'en', 
     interpolation: { escapeValue: false },
   });
 
