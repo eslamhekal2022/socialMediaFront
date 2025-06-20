@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/userContext.jsx';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import egypt from "./Flag_of_Egypt.png"
-import UNS from "./Flag_of_the_United_States.png"
 import { FaIcons } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import { useNotification } from '../../context/notifications.jsx';
@@ -36,8 +34,8 @@ const [selectedLang, setSelectedLang] = useState(i18n.language);
   }, [i18n.language]);
 
   const flags = {
-    en: UNS,
-    ar: egypt
+    en: "/Flags/Flag_of_the_United_States.png",
+  ar: "/Flags/Flag_of_Egypt.png"
   };
 
   const changeLanguage = (e) => {
