@@ -121,9 +121,9 @@ handleToggleFollow,isFollowing
                             setUpdatedText(cmt.text);
                           }}
                         >
-                          ✏️ تعديل
+                          ✏️ {t("edit")}
                         </button>
-                        <button  onClick={() => deleteComment(post._id, cmt._id)}>🗑️ حذف</button>
+                        <button  onClick={() => deleteComment(post._id, cmt._id)}>🗑️ {t("delete")}</button>
                       </div>
                     )}
                   </div>

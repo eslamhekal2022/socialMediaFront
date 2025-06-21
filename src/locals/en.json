@@ -6,5 +6,8 @@
  "unFollow":"unFollow",
  "Follow":"Follow",
  "Verified":"Registration successful",
- "PleaseCheck":"Please check your email to activate your account before logging in."
+ "PleaseCheck":"Please check your email to activate your account before logging in.",
+     "delete":"delete",
+    "edit":"edit"
+
 }

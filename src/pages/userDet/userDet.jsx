@@ -4,23 +4,32 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { updateUserImage } from '../../Redux/user';
-import './userDet.css'; 
+import './userDet.css';
 import GetUserPosts from '../PostsSystem/GetUserPosts.jsx';
 import AddPost from '../PostsSystem/CreatePosts.jsx';
 import { useUser } from '../../context/userContext.jsx';
 
 export default function UserDet() {
-  
   const { id } = useParams();
   const fileInputRef = useRef(null);
   const [timestamp, setTimestamp] = useState(Date.now());
   const dispatch = useDispatch();
   const API = import.meta.env.VITE_API_URL;
 
+  const { getUser, setuserDet, userDet } = useUser();
 
+  const [name, setName] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
-  const {getUser,setuserDet,userDet}=useUser()
+  useEffect(() => {
+    if (id) getUser(id);
+  }, [id]);
 
+  useEffect(() => {
+    if (userDet?.name) {
+      setName(userDet.name);
+    }
+  }, [userDet]);
 
   async function handleFileChange(e) {
     const file = e.target.files[0];
@@ -33,13 +42,11 @@ export default function UserDet() {
       const { data } = await axios.post(
         `${API}/updateUserImage/${id}`,
         formData,
-        
         {
           headers: {
             token: localStorage.getItem("token"),
           },
         }
-        
       );
 
       if (data.success) {
@@ -52,48 +59,79 @@ export default function UserDet() {
       toast.error('Error uploading image');
     }
   }
-useEffect(() => {
-  if (id) getUser(id);
-}, [id]);
-  return (
-  <div className="user-details-container">
 
-  <input
-    type="file"
-    ref={fileInputRef}
-    style={{ display: 'none' }}
-    onChange={handleFileChange}
-    accept="image/*"
-  />
+  async function handleNameUpdate() {
+    try {
+      const { data } = await axios.put(
+        `${API}/editUser`,
+        { name },
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
 
-  {/* صورة المستخدم */}
-  <img
-    className="user-profile-image"
-    src={
-      userDet?.image
-        ? userDet.image.startsWith('http')
-          ? `${userDet.image}?t=${timestamp}`
-          : `${API}${userDet.image}?t=${timestamp}`
-        : `https://ui-avatars.com/api/?name=${userDet?.name}&background=random&color=fff`
+      if (data.user) {
+        setuserDet(data.user);
+        toast.success("Name updated successfully");
+        setIsEditing(false);
+      }
+    } catch (err) {
+      toast.error("Failed to update name");
     }
-    alt={userDet?.name || 'user'}
-    onClick={() => fileInputRef.current.click()}
-  />
+  }
 
-  {/* اسم المستخدم */}
-  <h1 className="user-name">{userDet?.name}</h1>
+  return (
+    <div className="user-details-container">
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+        accept="image/*"
+      />
 
-  {/* بوكس إضافة منشور */}
-  <div className="profile-section">
-    <AddPost userId={id} />
-  </div>
+      <img
+        className="user-profile-image"
+        src={
+          userDet?.image
+            ? userDet.image.startsWith('http')
+              ? `${userDet.image}?t=${timestamp}`
+              : `${API}${userDet.image}?t=${timestamp}`
+            : `https://ui-avatars.com/api/?name=${userDet?.name}&background=random&color=fff`
+        }
+        alt={userDet?.name || 'user'}
+        onClick={() => fileInputRef.current.click()}
+      />
 
-  {/* بوكس عرض المنشورات */}
-  <div className="profile-section">
-    <GetUserPosts  />
-  </div>
-  
-</div>
+      <div className="user-name-section">
+        {isEditing ? (
+          <>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="edit-name-input"
+            />
+            <button onClick={handleNameUpdate} className="save-btn">💾</button>
+            <button onClick={() => setIsEditing(false)} className="cancel-btn">✖</button>
+          </>
+        ) : (
+          <>
+            <h1 className="user-name">{name}</h1>
+            <button onClick={() => setIsEditing(true)} className="edit-btn">✏️</button>
+          </>
+        )}
+      </div>
 
+      <div className="profile-section">
+        <AddPost userId={id} />
+      </div>
+
+      <div className="profile-section">
+        <GetUserPosts />
+      </div>
+    </div>
   );
 }
