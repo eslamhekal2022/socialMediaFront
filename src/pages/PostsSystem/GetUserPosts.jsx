@@ -43,7 +43,9 @@ handleToggleFollow,isFollowing
             <img src={`${API}${post.user?.image}`} className="avatar" alt="user" />
             <div>
               <h4 className="user-name">{post.user?.name}</h4>
+            {userId==post?.user._id?   
               <p className="RemovePost" onClick={() => DeletePost(post._id)}>x</p>
+              :null}
               <span className="post-date">{new Date(post.createdAt).toLocaleString()}</span>
             </div>
           

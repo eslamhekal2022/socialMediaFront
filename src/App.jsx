@@ -14,13 +14,16 @@ import GetUserPosts from "./pages/PostsSystem/GetUserPosts.jsx";
 import UserDet from "./pages/userDet/userDet.jsx";
 import { PostProvider } from "./context/postContext.jsx";
 import { SocketProvider } from "./context/socketContext.jsx";
-import  socket  from "./services/socket.js";
-import { useEffect } from "react";
+
 import { NotificationProvider } from "./context/notifications.jsx";
 import Notifications from "./pages/notifications/Notifications.jsx";
 import SearchComponent from "./pages/Search/Search.jsx";
 import VerifyEmail from "./pages/VerifyEmail/VerifyEmail.jsx";
 import CheckEmail from "./pages/CheckEmail/CheckEmail.jsx";
+import UpdateRole from "./pages/UpdateRole/UpdateRole.jsx";
+import useNotificationSocket from "./hook/NotificationSocket.js";
+import Converstions from "./pages/Converstions/Converstions.jsx";
+import ChatPage from "./pages/Chat/ChatPage.jsx";
 
 const routers = createBrowserRouter([
   {
@@ -38,48 +41,24 @@ const routers = createBrowserRouter([
       { path: "notifications", element: <Notifications/> },
       { path: "search", element: <SearchComponent/> },
       { path: "CheckEmail", element: <CheckEmail/> },
+      { path: "chat/:id", element: <Converstions/> },
+      { path: "UpdateRole/:userId", element: <UpdateRole /> },
       { path: "verify-email/:token", element: <VerifyEmail/> },
+    { path: "ChatPage", element: <ChatPage />, children: [
+           { path: "chat/:id", element: <Converstions/> },      
+],
 
+    },
+    
     ],
   },
 ]);
 
 export default function App() {
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
+useNotificationSocket()
 
-  if (token && userId) {
-    socket.emit("addUser", userId);
-  }
 
-const handleNotification = (data) => {
-  const currentUserId = localStorage.getItem("userId");
-
-  if (data.receiverId !== currentUserId) return; // ✋ الإشعار مش ليا
-
-  const action =
-    data.type === "like"
-      ? "أعجب بمنشورك"
-      : data.type === "comment"
-      ? "علق على منشورك"
-      : "قام بمتابعتك ";
-
-  toast.info(`📢 ${data.senderName} ${action}`);
-};
-
-  // 🟢 تسجيل المستمعين
-  socket.on("getNotification", handleNotification);
-  socket.on("doComment", handleNotification); // نفس الدالة تشتغل على النوعين
-  socket.on("getFollow", handleNotification); // نفس الدالة تشتغل على النوعين
-
-  return () => {
-    socket.off("getNotification", handleNotification);
-    socket.off("doComment", handleNotification);
-    socket.off("getFollow", handleNotification);
-  };
-}, []);
 
 
 

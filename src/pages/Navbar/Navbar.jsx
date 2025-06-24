@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { FaIcons } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import { useNotification } from '../../context/notifications.jsx';
+import { FaMessage } from "react-icons/fa6";
 
 export default function Navbar() {
   const {notifications}=useNotification()
@@ -98,6 +99,12 @@ const [selectedLang, setSelectedLang] = useState(i18n.language);
 
         <div className={`nav-right ${menuOpen ? 'menu-open' : ''}`}>
          
+                   {token && isPrivileged && (
+            <Link onClick={handleCloseMenu} to="/ChatPage" className="icon-link">
+              <FaMessage/>
+              <span className="count">0</span>
+            </Link>
+          )}
 <Link onClick={handleCloseMenu} to="/notifications" className="icon-link">
               <IoIosNotifications/>
             {UnreadNotifications==0?null: <span className="count">{UnreadNotifications}</span>} 

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './searchUsers.css';
 import { useUser } from '../../context/userContext';
 import { useTranslation } from 'react-i18next';
+import { FaMessage } from "react-icons/fa6";
+import useStartConversation from '../../hook/StartConverstion.js';
 
 const SearchUsersComponent = () => {
   const {t}=useTranslation()
@@ -13,7 +15,7 @@ const SearchUsersComponent = () => {
   const query = new URLSearchParams(location.search).get('query');
   const API = import.meta.env.VITE_API_URL;
 
-  const { handleToggleFollow, isFollowing, setFollowingUsers } = useUser();
+const { handleToggleFollow, isFollowing, setFollowingUsers } = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +42,9 @@ const SearchUsersComponent = () => {
     fetchData();
   }, [query]);
 
+
+  const { startConversation } = useStartConversation();
+
   return (
     <div className="user-search-container">
     {users.length > 0 ? (
@@ -62,7 +67,11 @@ const SearchUsersComponent = () => {
         >
           {isFollowing(user._id) ?t("unFollow") : t("Follow")}
         </button>
-      </div>
+<button onClick={() => startConversation(user._id,"/chat/"+user._id)}>
+  <FaMessage />
+</button>  
+
+</div>
     ))
 ) : (
   <p className="no-results">لا يوجد نتائج</p>
