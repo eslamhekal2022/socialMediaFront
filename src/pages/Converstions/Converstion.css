@@ -1,7 +1,9 @@
 .conversation-container {
   display: flex;
   flex-direction: column;
-  height: 90%;
+  height: 100%;
+  max-height: calc(100vh - 80px); /* أو حسب الهيدر */
+  overflow: hidden;
 }
 
 .messages {
@@ -12,13 +14,15 @@
   flex-direction: column;
   gap: 12px;
   background-color: #f9f9f9;
+  scroll-behavior: smooth;
 }
 
 .message-box {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  max-width: 75%;
+  max-width: 80%;
+  word-break: break-word;
 }
 
 .sent {
@@ -31,15 +35,16 @@
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .message-content {
   background-color: #e1f0ff;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 10px 14px;
+  border-radius: 15px;
   max-width: 100%;
 }
 
@@ -66,15 +71,15 @@
 
 .message-input-container input {
   flex: 1;
-  padding: 10px;
+  padding: 10px 15px;
   border: 1px solid #ccc;
   border-radius: 20px;
   outline: none;
-  margin-right: 10px;
 }
 
 .message-input-container button {
   padding: 0 20px;
+  margin-left: 10px;
   border: none;
   background-color: #007bff;
   color: white;
@@ -85,4 +90,32 @@
 
 .message-input-container button:hover {
   background-color: #0056b3;
+}
+
+.check {
+  color: gray;
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+  text-align: right;
+}
+
+.check.read {
+  color: blue;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .message-box {
+    max-width: 95%;
+  }
+
+  .message-content {
+    font-size: 14px;
+  }
+
+  .message-input-container input {
+    font-size: 14px;
+  }
 }

@@ -46,9 +46,24 @@ const useChatSocket = ({ userId, currentChatId, setMessages }) => {
     };
 
     socket.on("newMessage", handleNewMessage);
+socket.on("messagesRead", ({ readerId }) => {
+  // لو الطرف التاني قرأ رسائلي وبيكلمني أنا
+  if (readerId === currentChatId) {
+    setMessages((prev) =>
+      prev.map((msg) => {
+        const senderId = typeof msg.senderId === 'object' ? msg.senderId._id : msg.senderId;
+        if (senderId === userId) {
+          return { ...msg, isRead: true };
+        }
+        return msg;
+      })
+    );
+  }
+});
 
     return () => {
       socket.off("newMessage", handleNewMessage);
+      socket.off("messagesRead");
     };
   }, [userId, currentChatId, setMessages]);
 };

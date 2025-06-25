@@ -1,20 +1,20 @@
-/* Reset */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .navbar {
   width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .nav-content {
-  width:80% ;
+  width: 80%;
   margin: auto;
   padding: 0.5rem 1rem;
   display: flex;
@@ -23,63 +23,55 @@
   flex-wrap: wrap;
 }
 
-/* Logo */
-.logo {
+/* Sections */
+.nav-left,
+.nav-center,
+.nav-auth {
   display: flex;
   align-items: center;
-  text-decoration: none;
-  color: #333;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-.Leaf {
-  margin-right: 8px;
-  color: green;
+  gap: 12px;
 }
 
-/* Language Switcher */
-.navbar__lang-switcher {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.logo {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #333;
+  text-decoration: none;
 }
-.flag-icon {
-  width: 24px;
-  height: 16px;
-  object-fit: contain;
-}
-.lang-select {
+
+.lang-switcher select {
   padding: 4px 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
+.flag-icon {
+  width: 24px;
+  height: 16px;
+}
 
 /* Search */
+.nav-center {
+  flex: 1;
+  justify-content: center;
+}
 .search-box {
-  padding: 0.4rem 0.8rem;
-  width: 300px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 400px;
+  padding: 6px 12px;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
 
-/* Nav Right */
+/* Icons */
 .nav-right {
   display: flex;
+  gap: 15px;
   align-items: center;
-  gap: 12px;
-  position: relative;
 }
-
-/* Icon links */
 .icon-link {
   position: relative;
   color: #333;
   font-size: 1.2rem;
-  text-decoration: none;
-}
-.icon-link i {
-  font-size: 1.3rem;
 }
 .count {
   position: absolute;
@@ -89,45 +81,37 @@
   color: white;
   font-size: 0.7rem;
   border-radius: 50%;
-  padding: 2px 5px;
+  padding: 2px 6px;
 }
 
-/* Admin Panel Button */
-.AdminBtn {
-  background-color: #000;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Login/Logout */
-.login-btn, .logout-btn {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.logout-btn {
-  background-color: #dc3545;
-}
-
-/* Profile Image */
-.profile-pic-link {
-  display: flex;
-  align-items: center;
-}
+/* Profile & Auth */
 .profile-pic {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
 }
+.login-btn,
+.logout-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.logout-btn {
+  background-color: #dc3545;
+}
+.AdminBtn {
+  padding: 6px 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
 
-/* Hamburger menu */
+/* Hamburger */
 .hamburger {
   display: none;
   font-size: 1.5rem;
@@ -136,14 +120,27 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .search-box {
-    width: 100%;
-    margin: 10px 0;
-  }
-
   .nav-content {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+  }
+
+  .nav-left,
+  .nav-center,
+  .nav-auth {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .nav-center {
+    order: 3;
+  }
+
+  .hamburger {
+    display: block;
+    align-self: flex-end;
+    margin-top: 10px;
   }
 
   .nav-right {
@@ -155,16 +152,7 @@
     margin-top: 10px;
   }
 
-  .nav-right.menu-open {
+  .nav-right.open {
     display: flex;
-  }
-
-  .hamburger {
-    display: block;
-    align-self: flex-end;
-  }
-
-  .navbar__lang-switcher {
-    margin-top: 10px;
   }
 }
