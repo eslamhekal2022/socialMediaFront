@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { usePost } from "../../../context/postContext.jsx";
 import { useUser } from "../../../context/userContext.jsx";
 
-const GetUserPosts = () => {
+const AllPosts = () => {
   const {t,i18n}=useTranslation()
 const currentLang = i18n.language; // هتكون "ar" أو "en"
 
@@ -149,4 +149,4 @@ handleToggleFollow,isFollowing
   );
 };
 
-export default GetUserPosts;
+export default AllPosts;

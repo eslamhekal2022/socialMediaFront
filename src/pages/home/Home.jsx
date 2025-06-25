@@ -6,6 +6,7 @@ import ChatPage from '../Chat/ChatPage.jsx'
 export default function Home() {
   return (
     <div className='Home'>
+    <AllPosts/>
     </div>
   )
 }
