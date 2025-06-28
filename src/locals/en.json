@@ -7,7 +7,14 @@
  "Follow":"Follow",
  "Verified":"Registration successful",
  "PleaseCheck":"Please check your email to activate your account before logging in.",
-     "delete":"delete",
-    "edit":"edit"
-
+ "delete":"delete",
+ "edit":"edit",
+  "verifyingEmailMessage": "Verifying your email...",
+  "emailVerifiedSuccessfully": "Your email has been verified successfully! You will be redirected to the login page...",
+  "emailVerificationError": "An error occurred during verification. Please try again.",
+  "VerifyPage": "Email verified successfully ✅",
+  "pleaseWait": "Please wait...",
+  "invalidToken": "Activation link is invalid.",
+  "expiredToken": "Activation link has expired.",
+  "alreadyVerified": "This account is already verified."
 }

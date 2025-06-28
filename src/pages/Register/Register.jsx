@@ -11,7 +11,7 @@ const Register = () => {
     email: "",
     password: "",
     phone: "",
-    image: null,  // إضافة خاصية للصورة
+    image: null, 
   });
   const [preview, setPreview] = useState(null);
 

@@ -49,11 +49,11 @@ const { handleToggleFollow, isFollowing, setFollowingUsers } = useUser();
     <div className="user-search-container">
     {users.length > 0 ? (
   users
-    .filter(user => user._id !== userId) // ✅ تجاهل المستخدم الحالي
+    .filter(user => user._id !== userId)
     .map((user) => (
       <div key={user._id} className="user-card">
         <img
-          src={user.image ? `${API}${user.image}` : `https://ui-avatars.com/api/?name=${user.name}`}
+          src={user.image ? `${API}${user.image}`:`https://ui-avatars.com/api/?name=${user.name}`}
           alt={user.name}
           className="user-avatar"
         />
