@@ -5,17 +5,15 @@ import { toast } from "react-toastify";
 const PostContext = createContext();
 
 export const PostProvider = ({ children }) => {
-
   const [refresh, setRefresh] = useState(false);
-
   const API = import.meta.env.VITE_API_URL;
-  // setPosts setuserposts
   const [userposts, setuserposts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [commentMap, setCommentMap] = useState({});
   const [toggleCommentMap, setToggleCommentMap] = useState({});
 const [editingComment, setEditingComment] = useState(null);
 const [updatedText, setUpdatedText] = useState("");
+
 const token=localStorage.getItem("token")
 
 
@@ -44,23 +42,29 @@ const FetchData = async () => {
     }
   };  
 
-  const handleLike = async (postId) => {
-    try {
-      const { data } = await axios.put(`${API}/likePost/${postId}`, {}, {
-        headers: { token },
-      });
+const handleLike = async (postId) => {
+  try {
 
+    const { data } = await axios.put(
+      `${API}/likePost/${postId}`,
+      {},
+      {
+        headers: {
+          token, // ✅ نبعته كـ token
+        },
+      }
+    );
 
-      
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId ? { ...post, likes: data.likes } : post
-        )
-      );
-    } catch (err) {
-      toast.error("فشل في تنفيذ اللايك");
-    }
-  };
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId ? { ...post, likes: data.likes } : post
+      )
+    );
+  } catch (err) {
+    toast.error("فشل في تنفيذ اللايك");
+    console.error("LIKE ERROR:", err?.response?.data || err.message);
+  }
+};
 
 const DoComment = async (postId) => {
   try {
